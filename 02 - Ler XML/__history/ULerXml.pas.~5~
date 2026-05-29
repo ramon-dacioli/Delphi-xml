@@ -1,0 +1,40 @@
+unit ULerXml;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Xml.xmldom, Xml.XMLIntf, Xml.XMLDoc;
+
+type
+  TfrmLerXml = class(TForm)
+    pnlLerXml: TPanel;
+    btnLerXml: TButton;
+    treLerXml: TTreeView;
+    XMLDocument1: TXMLDocument;
+    OpenDialog1: TOpenDialog;
+    procedure btnLerXmlClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLerXml: TfrmLerXml;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmLerXml.btnLerXmlClick(Sender: TObject);
+begin
+  XMLDocument1.Active := False;
+
+  if OpenDialog1.Execute then
+    ShowMessage(OpenDialog1.FileName);
+
+end;
+
+end.

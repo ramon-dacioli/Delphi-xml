@@ -4,24 +4,77 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Xml.xmldom, Xml.XMLIntf, Xml.XMLDoc;
 
 type
-  TfrmLerXml = class(TForm)
+  TFLerXml = class(TForm)
     pnlLerXml: TPanel;
     btnLerXml: TButton;
     treLerXml: TTreeView;
+    XMLDocument1: TXMLDocument;
+    OpenDialog1: TOpenDialog;
+    procedure btnLerXmlClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    procedure CriarArvore(XmlNode: IXMLNode; TreeNode: TTreeNode);
   end;
 
 var
-  frmLerXml: TfrmLerXml;
+  FLerXml: TFLerXml;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFLerXml.btnLerXmlClick(Sender: TObject);
+begin
+  XMLDocument1.Active := False;
+
+  OpenDialog1.Filter := 'Arquivos XML|*.xml';
+
+  if OpenDialog1.Execute then
+  begin
+    XMLDocument1.LoadFromFile(OpenDialog1.FileName);
+    XMLDocument1.Active := True;
+    treLerXml.Items.Clear;
+    CriarArvore(XMLDocument1.DocumentElement, nil);
+    treLerXml.FullExpand;
+  end;
+
+end;
+
+procedure TFLerXml.CriarArvore(XmlNode: IXMLNode; TreeNode: TTreeNode);
+var
+  I: Integer;
+  NewTreeNode: TTreeNode;
+  NodeText: String;
+  AttrNode: IXMLNode;
+begin
+  // se o tipo de nó não for ntElement, pula
+  if not (XmlNode.NodeType = ntElement) then
+    Exit;
+
+  // adiciona os nós
+  NodeText := XmlNode.NodeName;
+  if XmlNode.IsTextElement then
+    NodeText := NodeText + ' = ' + XmlNode.NodeValue;
+  NewTreeNode := treLerXml.Items.AddChild(TreeNode, NodeText);
+
+  // adiciona os atributos
+  for I := 0 to pred(XmlNode.AttributeNodes.Count) do
+  begin
+    AttrNode := XmlNode.AttributeNodes.Nodes[I];
+    treLerXml.Items.AddChild(NewTreeNode, '[' + AttrNode.NodeName + ' = "' + AttrNode.Text + '"]');
+  end;
+
+  // adiciona cada nó filho
+  if XmlNode.HasChildNodes then
+    for I := 0 to pred(XmlNode.ChildNodes.Count) do
+      CriarArvore(XmlNode.ChildNodes.Nodes[I], NewTreeNode);
+      
+end;
 
 end.

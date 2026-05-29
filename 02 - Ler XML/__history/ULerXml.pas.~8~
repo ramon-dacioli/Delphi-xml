@@ -1,0 +1,48 @@
+unit ULerXml;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Xml.xmldom, Xml.XMLIntf, Xml.XMLDoc;
+
+type
+  TFLerXml = class(TForm)
+    pnlLerXml: TPanel;
+    btnLerXml: TButton;
+    treLerXml: TTreeView;
+    XMLDocument1: TXMLDocument;
+    OpenDialog1: TOpenDialog;
+    procedure btnLerXmlClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FLerXml: TFLerXml;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFLerXml.btnLerXmlClick(Sender: TObject);
+begin
+  XMLDocument1.Active := False;
+
+  OpenDialog1.Filter := 'Arquivos XML|*.xml';
+
+  if OpenDialog1.Execute then
+  begin
+    XMLDocument1.LoadFromFile(OpenDialog1.FileName);
+    XMLDocument1.Active := True;
+    treLerXml.Items.Clear;
+    CriarArvore(XMLDocument1.DocumentElement, nil);
+    treLerXml.FullExpand;
+  end;
+
+end;
+
+end.

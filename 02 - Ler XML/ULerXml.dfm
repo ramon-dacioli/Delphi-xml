@@ -1,4 +1,4 @@
-object frmLerXml: TfrmLerXml
+object FLerXml: TFLerXml
   Left = 0
   Top = 0
   Caption = 'Ler Xml'
@@ -26,6 +26,7 @@ object frmLerXml: TfrmLerXml
       Height = 41
       Caption = 'Ler Xml'
       TabOrder = 0
+      OnClick = btnLerXmlClick
     end
   end
   object treLerXml: TTreeView
@@ -36,9 +37,13 @@ object frmLerXml: TfrmLerXml
     Align = alClient
     Indent = 19
     TabOrder = 1
-    ExplicitLeft = 160
-    ExplicitTop = 160
-    ExplicitWidth = 121
-    ExplicitHeight = 97
+  end
+  object XMLDocument1: TXMLDocument
+    Left = 304
+    Top = 224
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 440
+    Top = 224
   end
 end
