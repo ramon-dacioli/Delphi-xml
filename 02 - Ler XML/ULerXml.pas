@@ -1,0 +1,27 @@
+unit ULerXml;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmLerXml = class(TForm)
+    pnlLerXml: TPanel;
+    btnLerXml: TButton;
+    treLerXml: TTreeView;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLerXml: TfrmLerXml;
+
+implementation
+
+{$R *.dfm}
+
+end.
