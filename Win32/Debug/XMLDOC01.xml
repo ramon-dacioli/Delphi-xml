@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PESSOA ID="01">
+	<NOME>Ramon Luiz</NOME>
+	<EMAIL>ramon_muz@hotmail.com</EMAIL>
+	<TELEFONE TIPO="RESIDENCIAL"><DDD>88</DDD><NUMERO>99999-9999</NUMERO></TELEFONE>
+</PESSOA>

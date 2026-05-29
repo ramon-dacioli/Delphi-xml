@@ -1,0 +1,64 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Xml.xmldom, Xml.XMLIntf, Vcl.StdCtrls,
+  Xml.XMLDoc, Xml.Win.msxmldom;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    XMLDocument1: TXMLDocument;
+    Memo1: TMemo;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  Raiz, id, nome, email, telefone, tipo, ddd, numero: IXMLNode;
+begin
+  try
+    XMLDocument1.FileName := '';
+    XMLDocument1.XML.Text := '';
+    XMLDocument1.Active   := False;
+    XMLDocument1.Active   := True;
+    XMLDocument1.Version  := '1.0';
+    XMLDocument1.Encoding := 'UTF-8';
+
+    //Criando a raiz pessoa
+    Raiz := XMLDocument1.AddChild('PESSOA');
+
+    //Atributos da raiz
+    id      := XMLDocument1.CreateNode('ID', ntAttribute);
+    id.Text := '01';
+    Raiz.AttributeNodes.Add(id);
+
+    //Criando um nó filho de 'pessoa' = nome
+    nome      := XMLDocument1.CreateNode('NOME', ntElement);
+    nome.Text := 'Ramon Luiz';
+    Raiz.ChildNodes.Add(nome);
+
+    //Criando um nó filho de 'pessoa' = email
+    nome      := XMLDocument1.CreateNode('EMAIL', ntElement);
+    nome.Text := 'ramon_muz@hotmail.com';
+    Raiz.ChildNodes.Add(nome);
+
+  finally
+
+  end;
+end;
+
+end.

@@ -101,7 +101,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="Unit1.pas">
-            <Form>Form1</Form>
+            <Form>frmGerarXml</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">
