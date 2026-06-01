@@ -1,0 +1,133 @@
+unit ULeitorRss;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Xml.xmldom, Xml.XMLIntf, Xml.XMLDoc, System.Net.URLClient,
+  System.Net.HttpClient, System.Net.HttpClientComponent;
+
+type
+  TfrmLeitorRss = class(TForm)
+    pnlLeitorRss: TPanel;
+    ltvLeitorRss: TListView;
+    redLeitorRss: TRichEdit;
+    btnAtualizar: TButton;
+    XMLDocument1: TXMLDocument;
+    procedure btnAtualizarClick(Sender: TObject);
+    procedure ltvLeitorRssClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    function DownloadURLFile(const EnderecoRSS,
+      ArquivoLocal: TFileName): Boolean;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLeitorRss: TfrmLeitorRss;
+
+implementation
+
+uses
+  Vcl.ExtActns;
+
+{$R *.dfm}
+
+function TfrmLeitorRss.DownloadURLFile(const EnderecoRSS, ArquivoLocal: TFileName): Boolean;
+begin
+  Result := True;
+
+  with TDownloadURL.Create(nil) do
+  try
+    URL := EnderecoRSS;
+    FileName := ArquivoLocal;
+    try
+      ExecuteTarget(nil);
+    except
+      on E: Exception do
+      begin
+        ShowMessage(E.ClassName + #13#10 + E.Message);
+        Result := False;
+      end;
+    end;
+  finally
+    Free;
+  end;
+end;
+
+procedure TfrmLeitorRss.FormShow(Sender: TObject);
+begin
+  btnAtualizar.Parent := pnlLeitorRss;
+end;
+
+procedure TfrmLeitorRss.ltvLeitorRssClick(Sender: TObject);
+begin
+  redLeitorRss.Text := ltvLeitorRss.Items.Item[ltvLeitorRss.ItemIndex].SubItems[1];
+end;
+
+procedure TfrmLeitorRss.btnAtualizarClick(Sender: TObject);
+const
+  //Verificar se o link tem redirecionamento
+  //link original era https://www.gov.br/pt-br/noticias/ultimas-noticias/ultimas-noticias/RSS
+  EnderecoRSS = 'https://www.gov.br/pt-br/noticias/mais-noticias/RSS';
+var
+  ArquivoLocal: TFileName;
+  StartItemNode: IXMLNode;
+  ANode: IXMLNode;
+  Titulo, Descricao, Link: WideString;
+begin
+  ArquivoLocal := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) + 'RSS';
+
+  Screen.Cursor := crHourGlass;
+  try
+    if not DownloadURLFile(EnderecoRSS, ArquivoLocal) then
+    begin
+      Screen.Cursor := crDefault;
+      raise Exception.CreateFmt('Erro! Verifique a conexão com a internet.', []);
+      Exit
+    end;
+
+    if not FileExists(ArquivoLocal) then
+    begin
+      Screen.Cursor := crDefault;
+      raise Exception.Create('Arquivo de manchetes não localizado');
+      Exit;
+    end;
+
+    ltvLeitorRss.Clear;
+
+    XMLDocument1.FileName := ArquivoLocal;
+    XMLDocument1.Active := True;
+
+    StartItemNode := XMLDocument1.DocumentElement; // rdf:RDF
+    ANode := StartItemNode.ChildNodes.First;
+
+    while Assigned(ANode) do
+    begin
+      if SameText(ANode.LocalName, 'item') then
+      begin
+        Titulo := ANode.ChildNodes['title'].Text;
+        Link := ANode.ChildNodes['link'].Text;
+        Descricao := ANode.ChildNodes['description'].Text;
+
+        with ltvLeitorRss.Items.Add do
+        begin
+          Caption := Titulo;
+          SubItems.Add(Link);
+          SubItems.Add(Descricao);
+        end;
+      end;
+
+      ANode := ANode.NextSibling;
+    end;
+
+  finally
+    DeleteFile(ArquivoLocal);
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+end.

@@ -1,0 +1,14 @@
+program LeitoRss;
+
+uses
+  Vcl.Forms,
+  ULeitorRss in 'ULeitorRss.pas' {frmLeitorRss};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmLeitorRss, frmLeitorRss);
+  Application.Run;
+end.
