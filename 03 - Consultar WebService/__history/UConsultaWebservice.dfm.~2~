@@ -1,0 +1,43 @@
+object frmConsultarWebService: TfrmConsultarWebService
+  Left = 0
+  Top = 0
+  Caption = 'Consultar Web Service'
+  ClientHeight = 433
+  ClientWidth = 622
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  PixelsPerInch = 96
+  TextHeight = 15
+  object pnlConsultaWebServiceTop: TPanel
+    Left = 0
+    Top = 0
+    Width = 622
+    Height = 73
+    Align = alTop
+    TabOrder = 0
+  end
+  object pnlConsultaWebServiceBottom: TPanel
+    Left = 0
+    Top = 264
+    Width = 622
+    Height = 169
+    Align = alBottom
+    TabOrder = 1
+  end
+  object memConsultaWebService: TMemo
+    Left = 0
+    Top = 73
+    Width = 622
+    Height = 191
+    Align = alClient
+    TabOrder = 2
+    ExplicitLeft = 168
+    ExplicitTop = 144
+    ExplicitWidth = 185
+    ExplicitHeight = 89
+  end
+end

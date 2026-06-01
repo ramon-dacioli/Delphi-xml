@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/08/28 14:55:49.000.706,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/08/28 17:24:59.000.502,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/08/28 17:29:50.000.194,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/08/28 17:54:30.000.045,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/08/29 08:44:32.000.938,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/08/29 09:20:22.000.036,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/01/30 15:16:31.000.093,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/05/04 08:41:33.000.580,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/05/04 14:09:25.000.103,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/05/21 08:59:50.000.968,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/06/01 09:16:31.079,=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/06/01 09:17:41.269,C:\Users\RAMON\Documents\Projetos\Aula\XML\03 - Consultar WebService\UConsultaWebservice.dfm=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2026/06/01 09:17:41.269,C:\Users\RAMON\Documents\Projetos\Aula\XML\03 - Consultar WebService\UConsultaWebservice.pas=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/06/01 09:18:11.460,C:\Users\RAMON\Documents\Projetos\Aula\XML\03 - Consultar WebService\ConsultarWebService.dproj=C:\Users\RAMON\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
