@@ -8,7 +8,7 @@ uses
   Xml.xmldom, Xml.XMLIntf, Xml.XMLDoc;
 
 type
-  TFLerXml = class(TForm)
+  TfrmLerXml = class(TForm)
     pnlLerXml: TPanel;
     btnLerXml: TButton;
     treLerXml: TTreeView;
@@ -23,13 +23,13 @@ type
   end;
 
 var
-  FLerXml: TFLerXml;
+  frmLerXml: TfrmLerXml;
 
 implementation
 
 {$R *.dfm}
 
-procedure TFLerXml.btnLerXmlClick(Sender: TObject);
+procedure TfrmLerXml.btnLerXmlClick(Sender: TObject);
 begin
   XMLDocument1.Active := False;
 
@@ -46,7 +46,7 @@ begin
 
 end;
 
-procedure TFLerXml.CriarArvore(XmlNode: IXMLNode; TreeNode: TTreeNode);
+procedure TfrmLerXml.CriarArvore(XmlNode: IXMLNode; TreeNode: TTreeNode);
 var
   I: Integer;
   NewTreeNode: TTreeNode;

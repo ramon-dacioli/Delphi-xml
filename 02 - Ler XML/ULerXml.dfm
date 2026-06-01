@@ -1,4 +1,4 @@
-object FLerXml: TFLerXml
+object frmLerXml: TfrmLerXml
   Left = 0
   Top = 0
   Caption = 'Ler Xml'
