@@ -34,6 +34,7 @@ object frmConsultarWebService: TfrmConsultarWebService
       Height = 25
       Caption = 'Reallizar Consulta'
       TabOrder = 0
+      OnClick = btnRealizarConsultaClick
     end
     object mkCep: TMaskEdit
       Left = 16
@@ -58,9 +59,9 @@ object frmConsultarWebService: TfrmConsultarWebService
     object Label2: TLabel
       Left = 16
       Top = 27
-      Width = 69
+      Width = 40
       Height = 15
-      Caption = 'C'#243'digo IBGE:'
+      Caption = 'Cidade:'
     end
     object Label3: TLabel
       Left = 16
@@ -69,7 +70,7 @@ object frmConsultarWebService: TfrmConsultarWebService
       Height = 15
       Caption = 'Resultado da Busca'
     end
-    object EdCodigoIbge: TEdit
+    object edCidade: TEdit
       Left = 16
       Top = 48
       Width = 425
@@ -98,22 +99,6 @@ object frmConsultarWebService: TfrmConsultarWebService
   end
   object XMLDocument1: TXMLDocument
     Left = 176
-    Top = 144
-  end
-  object IdHTTP1: TIdHTTP
-    ProxyParams.BasicAuthentication = False
-    ProxyParams.ProxyPort = 0
-    Request.ContentLength = -1
-    Request.ContentRangeEnd = -1
-    Request.ContentRangeStart = -1
-    Request.ContentRangeInstanceLength = -1
-    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-    Request.BasicAuthentication = False
-    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
-    Request.Ranges.Units = 'bytes'
-    Request.Ranges = <>
-    HTTPOptions = [hoForceEncodeParams]
-    Left = 312
     Top = 144
   end
 end

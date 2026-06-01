@@ -16,12 +16,12 @@ type
     Label1: TLabel;
     btnRealizarConsulta: TButton;
     Label2: TLabel;
-    EdCodigoIbge: TEdit;
+    edCidade: TEdit;
     Label3: TLabel;
     EdResultadoBusca: TEdit;
     mkCep: TMaskEdit;
     XMLDocument1: TXMLDocument;
-    IdHTTP1: TIdHTTP;
+    procedure btnRealizarConsultaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,5 +34,17 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmConsultarWebService.btnRealizarConsultaClick(Sender: TObject);
+begin
+  memConsultaWebService.Clear;
+  XMLDocument1.Active := False;
+  XMLDocument1.LoadFromFile('http://cep.republicavirtual.com.br/web_cep.php?cep='+StringReplace(mkCep.Text,'-','',[rfReplaceAll])+'&formato=xml');
+  XMLDocument1.Active := True;
+  memConsultaWebService.Lines := XMLDocument1.XML;
+
+  edCidade.Text := XMLDocument1.ChildNodes['webservicecep'].ChildNodes['cidade'].Text;
+  EdResultadoBusca.Text := XMLDocument1.ChildNodes['webservicecep'].ChildNodes['resultado_txt'].Text;
+end;
 
 end.

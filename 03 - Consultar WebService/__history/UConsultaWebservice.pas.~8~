@@ -1,0 +1,51 @@
+unit UConsultaWebservice;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Xml.xmldom,
+  Xml.XMLIntf, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
+  IdHTTP, Xml.XMLDoc, Vcl.Mask;
+
+type
+  TfrmConsultarWebService = class(TForm)
+    pnlConsultaWebServiceTop: TPanel;
+    pnlConsultaWebServiceBottom: TPanel;
+    memConsultaWebService: TMemo;
+    Label1: TLabel;
+    btnRealizarConsulta: TButton;
+    Label2: TLabel;
+    edCidade: TEdit;
+    Label3: TLabel;
+    EdResultadoBusca: TEdit;
+    mkCep: TMaskEdit;
+    XMLDocument1: TXMLDocument;
+    IdHTTP1: TIdHTTP;
+    procedure btnRealizarConsultaClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConsultarWebService: TfrmConsultarWebService;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmConsultarWebService.btnRealizarConsultaClick(Sender: TObject);
+begin
+  memConsultaWebService.Clear;
+  memConsultaWebService.Text := IdHTTP1.Get('http://cep.republicavirtual.com.br/web_cep.php?cep='+StringReplace(mkCep.Text,'-','',[rfReplaceAll])+'&formato=xml');
+  XMLDocument1.Active := False;
+  XMLDocument1.LoadFromFile('http://cep.republicavirtual.com.br/web_cep.php?cep='+StringReplace(mkCep.Text,'-','',[rfReplaceAll])+'&formato=xml');
+  XMLDocument1.Active := True;
+
+  EdCodigoIbge.Text := XMLDocument1.ChildNodes['webservicecep'].ChildNodes['cidade'].Text;
+  EdResultadoBusca.Text := XMLDocument1.ChildNodes['webservicecep'].ChildNodes['resultado_txt'].Text;
+end;
+
+end.
